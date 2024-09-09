@@ -41,6 +41,8 @@ revealjs_script_plugins = [
     },
 ]
 revealjs_css_files = [
-    "revealjs/plugin/highlight/zenburn.css",
-    "https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css",
+    'revealjs/plugin/highlight/zenburn.css',
+    'https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css',
+    'css/common.css'
 ]
+budoux_targets = ["h1", "h2", "h3"]
