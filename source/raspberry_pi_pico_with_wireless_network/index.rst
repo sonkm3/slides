@@ -84,7 +84,7 @@ https://micropython.org
    array             gc                requests/__init__
    Plus any modules on the filesystem
 
-1.4.1 ArduinoでのLチカ(LED点滅)
+1.4.1 ArduinoでのLチカ
 --------------------------------------------
 + Arduinoのチュートリアルにあるサンプルコード
 
@@ -163,21 +163,39 @@ HTTPリクエストを送信する
 --------------------------------------------
 
 + requestsライブラリが利用可能
+
 .. code-block:: python
 
-   import urequests as requests
+   import json
+   import network
+   import rp2
    import time
+   import urequests
 
-   # setup wifi
 
-   while True:
-      if codey.wifi.is_connected():
-         codey.led.show(0,0,255)
-         res = requests.get(url='https://api.open-meteo.com/v1/forecast?latitude=35.6322596&longitude=139.7885507&hourly=temperature_2m&timezone=Asia%2FTokyo&forecast_days=1&models=jma_seamless')
-         print(res.text)
-         break
-      else:
-         time.sleep(3)
+   # 'https://api.open-meteo.com/v1/forecast?latitude=35.6322596&longitude=139.7885507&hourly=temperature_2m&timezone=Asia%2FTokyo&forecast_days=1&models=jma_seamless'
+   WEATHER_API_URL = 'https://api.open-meteo.com/v1/forecast?latitude=35.680959106959&longitude=139.76730676352&current=temperature_2m,wind_speed_10m'
+
+   rp2.country('JP')
+
+   wlan = network.WLAN(network.STA_IF)
+   wlan.active(True)
+
+   wlan.connect('', '')
+
+   while not wlan.isconnected() and wlan.status() >= 0:
+      print("Waiting to connect:")
+      time.sleep(1)
+
+   print(wlan.ifconfig())
+
+   response = urequests.get(WEATHER_API_URL)
+   response_body = json.loads(response.text)
+
+   print(f"temperature_2m:{response_body['current']['temperature_2m']}")
+   print(f"wind_speed_10m:{response_body['current']['wind_speed_10m']}")
+
+   wlan.disconnect()
 
 
 HTTPサーバーを立てたい
