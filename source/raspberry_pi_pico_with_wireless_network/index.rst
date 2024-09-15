@@ -138,14 +138,26 @@ https://docs.arduino.cc/tutorials/uno-rev3/Blink/
 + uf2ファイルをダウンロード https://micropython.org/download/RPI_PICO_W/
 + Rasppeberry Pi Pico WのBOOTSELボタンを押しながらUSBケーブルをコンピューターに接続
 + USBストレージとして認識されるので、MicroPythonのuf2ファイルをコピーします
-+ コピーが終わると自動的に再起動されます
-+ MicroPythonのREPLが起動しているのでシリアルコンソールで接続することができます
++ コピーが終わると自動的に再起動(アンマウント)されます
 
 1.5.1 mpremoteを使って動作確認
 --------------------------------------------
-+ `pip install mpremote`
-+ `mpremote list`
-+ `mpremote connect port:/dev/cu.usbmodemxxxxx`
+
++ MicroPythonのREPLが起動しているのでシリアルコンソールで接続することができます
+
+.. code-block:: shell-session
+
+  $ pip install mpremote
+  $ mpremote connect list
+  /dev/cu.usbmodem101 e661385283776133 2e8a:0005 MicroPython Board in FS mode
+  $ mpremote connect /dev/cu.usbmodem101
+  Connected to MicroPython at /dev/cu.usbmodem101
+  Use Ctrl-] or Ctrl-x to exit this shell
+  
+  >>> import sys
+  >>> sys.implementation
+  (name='micropython', version=(1, 23, 0, ''), _machine='Raspberry Pi Pico W with RP2040', _mpy=4870)
+  >>> 
 
 1.6. 開発環境の準備
 --------------------------------------------
@@ -153,20 +165,19 @@ https://docs.arduino.cc/tutorials/uno-rev3/Blink/
 
 1.6.1. 開発環境の準備
 --------------------------------------------
-+ RaspberryPiの公式ドキュメントではthonnyがお勧めされています
-+ VS Codeでもプラグインをインストールすることで開発できます
-
-.. image:: ../_static/raspberry_pi_pico_with_wireless_network/thonny.png
-   :width: 400px
-   :align: center
++ RaspberryPiの公式ドキュメントではThonny (https://thonny.org) がお勧めされています
 
 + https://projects.raspberrypi.org/en/projects/getting-started-with-the-pico
-+ https://thonny.org
 
 
-1.6.2. Replへの接続
+1.6.2. Thonnyについて
 --------------------------------------------
 
++ ファイル(ローカル、デバイス)、エディター、REPL、デバッグ用のペインが揃っています
+
+.. image:: ../_static/raspberry_pi_pico_with_wireless_network/thonny.png
+   :width: 500px
+   :align: center
 
 2.1. wifiの設定
 --------------------------------------------
