@@ -135,6 +135,17 @@ https://docs.arduino.cc/tutorials/uno-rev3/Blink/
 1.5. MicroPythonのインストール
 --------------------------------------------
 
++ Rasppeberry Pi Pico WのBOOTSELボタンを押しながらUSBケーブルをコンピューターに接続
++ USBストレージとして認識されるので、MicroPythonのuf2ファイルをコピーします
++ コピーが終わると自動的に再起動されます
++ MicroPythonのREPLが起動しているのでシリアルコンソールで接続することができます
+
+1.5.1 mpremoteを使って動作確認
+--------------------------------------------
++ `pip install mpremote`
++ `mpremote list`
++ `mpremote connect port:/dev/cu.usbmodemxxxxx`
+
 1.6. 開発環境の準備
 --------------------------------------------
 
@@ -159,6 +170,26 @@ https://docs.arduino.cc/tutorials/uno-rev3/Blink/
 2.1. wifiの設定
 --------------------------------------------
 
++ wifi接続はnetworkモジュールを使います
+
+.. code-block:: python
+
+   import network
+   import rp2
+   import time
+
+   rp2.country('JP')
+
+   wlan = network.WLAN(network.STA_IF)
+   wlan.active(True)
+   wlan.connect('SSID', 'password')
+
+   while not wlan.isconnected() and wlan.status() >= 0:
+      print("Waiting to connect:")
+      time.sleep(1)
+
+   print(wlan.ifconfig())
+
 HTTPリクエストを送信する
 --------------------------------------------
 
@@ -181,7 +212,7 @@ HTTPリクエストを送信する
    wlan = network.WLAN(network.STA_IF)
    wlan.active(True)
 
-   wlan.connect('', '')
+   wlan.connect('SSID', 'password')
 
    while not wlan.isconnected() and wlan.status() >= 0:
       print("Waiting to connect:")
