@@ -135,6 +135,7 @@ https://docs.arduino.cc/tutorials/uno-rev3/Blink/
 1.5. MicroPythonのインストール
 --------------------------------------------
 
++ uf2ファイルをダウンロード https://micropython.org/download/RPI_PICO_W/
 + Rasppeberry Pi Pico WのBOOTSELボタンを押しながらUSBケーブルをコンピューターに接続
 + USBストレージとして認識されるので、MicroPythonのuf2ファイルをコピーします
 + コピーが終わると自動的に再起動されます
@@ -254,6 +255,11 @@ HTTPサーバーを立てたい
 bluetooth
 --------------------------------------------
 
+aioble
+https://github.com/micropython/micropython-lib/tree/master/micropython/bluetooth/aioble
+
+アドバタイズ
+GATT
 
 
 
