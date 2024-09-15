@@ -28,6 +28,9 @@ language = 'ja'
 
 html_theme = 'alabaster'
 html_static_path = ['_static']
+html_css_files = ['custom.css',]   
+
+revealjs_static_path = ["_static"]
 
 revealjs_script_conf = {
     'revealjs_use_index': True,
@@ -41,8 +44,8 @@ revealjs_script_plugins = [
     },
 ]
 revealjs_css_files = [
+    'custom.css',
     'revealjs/plugin/highlight/zenburn.css',
-    'https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css',
-    'css/common.css'
+    # 'https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css',
 ]
-budoux_targets = ["h1", "h2", "h3"]
+# budoux_targets = ["h1", "h2", "h3"]
