@@ -318,7 +318,7 @@ aiobleを使ってサービスを提供する
       while True:
          async with await aioble.advertise(
                   _ADV_INTERVAL_US,
-                  name="temp-sense",
+                  name="temperature sensor",
                   services=[_ENV_SENSE_UUID],
                   appearance=_GENERIC_THERMOMETER,
                   manufacturer=(0xabcd, b"1234"),
@@ -327,6 +327,21 @@ aiobleを使ってサービスを提供する
             await connection.disconnected(timeout_ms=None)
       
    asyncio.run(instance1_task())
+
+確認する
+--------------------------------------------
+
+.. image:: ../_static/raspberry_pi_pico_with_wireless_network/lightblue_1-1.jpeg
+   :width: 150px
+
+.. image:: ../_static/raspberry_pi_pico_with_wireless_network/lightblue_1-2.jpeg
+   :width: 150px
+
+.. image:: ../_static/raspberry_pi_pico_with_wireless_network/lightblue_1-3.jpeg
+   :width: 150px
+
++ LightBlueを使って確認する
++ https://punchthrough.com/lightblue/
 
 
 aiobleを使ってCPUの温度をBLEで送信する
