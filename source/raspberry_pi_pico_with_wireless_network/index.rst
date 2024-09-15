@@ -266,12 +266,46 @@ HTTPサーバーを立てたい
 bluetooth
 --------------------------------------------
 
-aioble
-https://github.com/micropython/micropython-lib/tree/master/micropython/bluetooth/aioble
++ aioble
++ https://github.com/micropython/micropython-lib/tree/master/micropython/bluetooth/aioble
 
-アドバタイズ
-GATT
 
+プロトコル
+--------------------------------------------
+
++ GAP→デバイスの発見、接続、ペアリングなど
++ GATT→デバイス間のデータ、サービスの定義、のやり取り、GATTプロファイルを使ってデータのやりとりをおこなう
+
+
+aiobleを使ってBLEデバイスをスキャンする
+--------------------------------------------
+
+.. code-block:: python
+
+   import aioble
+   import asyncio
+
+   async def instance1_task():
+
+      async with aioble.scan(duration_ms=5000) as scanner:
+         async for result in scanner:
+               print(result, result.name(), result.rssi, result.services())
+
+   asyncio.run(instance1_task())
+
+
+aiobleを使ってCPUの温度をBLEで送信する
+-------------------------------------------- 
+
++ ドキュメント
++ https://github.com/micropython/micropython-lib/blob/master/micropython/bluetooth/aioble/README.md
+
+
+aiobleを使ってCPUの温度をBLEで送信する
+-------------------------------------------- 
+
++ サンプルコード
++ https://github.com/micropython/micropython-lib/blob/master/micropython/bluetooth/aioble/examples/temp_sensor.py
 
 
 https://github.com/Heerkog/MicroPythonBLEHID
