@@ -35,25 +35,23 @@ MicroPythonとRaspberry Pi Pico Wで始めるワイヤレス通信
    :width: 172px
    :align: center
 
-1.3. Raspberry Pi Picoとは
+1.3. Raspberry Pi Pico Wとは
 --------------------------------------------
-+ RP2040というマイクロコントローラーを使ったボードです
-
-  + Linuxが動作するRaspberry Piとは違います
-  + RP2350というマイクロコントローラーを搭載したRaspberry Pi Pico 2が2024/8/8に発表されましたが、wifiなどは搭載されていないので今回は対象としていません
++ Raspberry Pi PicoにWi-Fi、Bluetooth機能を追加したボードです
 
 image:: ../_static/raspberry_pi_pico_with_wireless_network/raspberry_pi_pico_w.jpg
    :width: 200px
    :align: right
 
-https://www.raspberrypi.com/products/raspberry-pi-pico/
+  + Linuxが動作するRaspberry PiやWiFiのないRaspberry Pi Pico、8月に発表されたRaspberry Pi Pico 2とは違います
+  + WiFi、Bluetoothを担うInfineon CYW43439がSPIでRP2040に接続されています
 
+https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html
 
 1.4. MicroPythonとは
 --------------------------------------------
 + Python3のサブセットで、マイクロコントローラー向けに最適化された言語です
-+ 使い慣れたPythonとライブラリを使うことでArduinoなどに比べて簡単に開発できます
-+ ※標準ライブラリ全ては含まれていないほか、サブセットとしていくつかの機能が省かれています
++ 使い慣れたPythonと標準ライブラリがある程度使えるのでArduinoなどに比べて簡単に開発できます
 
 https://micropython.org
 
@@ -190,6 +188,7 @@ https://docs.arduino.cc/tutorials/uno-rev3/Blink/
    import rp2
    import time
 
+
    rp2.country('JP')
 
    wlan = network.WLAN(network.STA_IF)
@@ -216,14 +215,12 @@ HTTPリクエストを送信する
    import urequests
 
 
-   # 'https://api.open-meteo.com/v1/forecast?latitude=35.6322596&longitude=139.7885507&hourly=temperature_2m&timezone=Asia%2FTokyo&forecast_days=1&models=jma_seamless'
    WEATHER_API_URL = 'https://api.open-meteo.com/v1/forecast?latitude=35.680959106959&longitude=139.76730676352&current=temperature_2m,wind_speed_10m'
 
    rp2.country('JP')
 
    wlan = network.WLAN(network.STA_IF)
    wlan.active(True)
-
    wlan.connect('SSID', 'password')
 
    while not wlan.isconnected() and wlan.status() >= 0:
@@ -277,7 +274,7 @@ bluetooth
 + GATT→デバイス間のデータ、サービスの定義、のやり取り、GATTプロファイルを使ってデータのやりとりをおこなう
 
 
-aiobleを使ってBLEデバイスをスキャンする
+BLEデバイスのスキャン
 --------------------------------------------
 
 .. code-block:: python
@@ -285,15 +282,16 @@ aiobleを使ってBLEデバイスをスキャンする
    import aioble
    import asyncio
 
-   async def instance1_task():
 
+   async def instance1_task():
       async with aioble.scan(duration_ms=5000) as scanner:
          async for result in scanner:
                print(result, result.name(), result.rssi, result.services())
 
    asyncio.run(instance1_task())
 
-aiobleを使ってサービスを提供する
+
+aiobleを使ってサービスを公開する
 --------------------------------------------
 
 .. code-block:: python
@@ -301,6 +299,7 @@ aiobleを使ってサービスを提供する
    import aioble
    import asyncio
    import bluetooth
+
 
    # https://www.bluetooth.com/specifications/assigned-numbers/
    _ENV_SENSE_UUID = bluetooth.UUID(0x181A) # Environmental Sensing Service 0x181A Environmental Sensing Service
@@ -328,7 +327,8 @@ aiobleを使ってサービスを提供する
       
    asyncio.run(instance1_task())
 
-確認する
+
+スマートフォンなどから確認する
 --------------------------------------------
 
 .. image:: ../_static/raspberry_pi_pico_with_wireless_network/lightblue_1-1.jpeg
@@ -344,14 +344,14 @@ aiobleを使ってサービスを提供する
 + https://punchthrough.com/lightblue/
 
 
-aiobleを使ってCPUの温度をBLEで送信する
+aiobleを使ってCPUの温度を公開する
 -------------------------------------------- 
 
 + ドキュメント
 + https://github.com/micropython/micropython-lib/blob/master/micropython/bluetooth/aioble/README.md
 
 
-aiobleを使ってCPUの温度をBLEで送信する
+aiobleを使ってCPUの温度を公開する
 -------------------------------------------- 
 
 + サンプルコード
@@ -363,7 +363,5 @@ https://github.com/Heerkog/MicroPythonBLEHID
 
 
 wifiからのhttpリクエストでBluetoothを操作する
-
-
 
 
