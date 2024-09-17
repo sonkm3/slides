@@ -39,12 +39,12 @@ MicroPythonとRaspberry Pi Pico Wで始めるワイヤレス通信
 --------------------------------------------
 + Raspberry Pi PicoにWi-Fi、Bluetooth機能を追加したボードです
 
-image:: ../_static/raspberry_pi_pico_with_wireless_network/raspberry_pi_pico_w.jpg
-   :width: 200px
-   :align: right
-
   + Linuxが動作するRaspberry PiやWiFiのないRaspberry Pi Pico、8月に発表されたRaspberry Pi Pico 2とは違います
   + WiFi、Bluetoothを担うInfineon CYW43439がSPIでRP2040に接続されています
+
+.. image:: ../_static/raspberry_pi_pico_with_wireless_network/IMG_7755.jpg
+   :width: 200px
+   :align: right
 
 https://www.raspberrypi.com/documentation/microcontrollers/pico-series.html
 
