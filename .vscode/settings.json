@@ -1,0 +1,7 @@
+{
+    "slidev.include": [
+        "**/slides.md",
+        "slidev/pages/raspberry_pi_pico_with_wireless_network/raspberry_pi_pico_with_wireless_network.md"
+    ],
+    "slidev.port": 3030
+}
